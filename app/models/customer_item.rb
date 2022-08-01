@@ -1,4 +1,4 @@
 class CustomerItem < ApplicationRecord
-  has_many :customers
-  has_many :items
+  belongs_to :customer
+  belongs_to :item
 end

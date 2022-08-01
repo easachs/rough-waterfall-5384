@@ -1,0 +1,4 @@
+<h1><%= @supermarket.name %></h1>
+<% @supermarket.distinct_items.each do |item| %>
+  <p><%= item.name %></p>
+<% end %>

@@ -1,3 +1,8 @@
 <h1><%= @supermarket.name %></h1>
 
 <%= link_to "#{@supermarket.name} Item Index", "/supermarkets/#{@supermarket.id}/items" %>
+
+<div id="most-popular">
+<% @supermarket.most_popular.each_with_index do |item, index| %>
+  <div id="item-<%= index %>"><p><%= item.name %><p></div>
+<% end %></div>

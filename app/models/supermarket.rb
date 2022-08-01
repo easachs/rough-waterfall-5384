@@ -6,4 +6,12 @@ class Supermarket < ApplicationRecord
   def distinct_items
     items.distinct
   end
+
+  def most_popular
+    items
+    .select('items.*, count(items.*) as item_count')
+    .group('items.id')
+    .order('item_count desc')
+    .limit(3)
+  end
 end

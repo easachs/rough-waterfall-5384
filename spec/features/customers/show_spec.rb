@@ -25,4 +25,23 @@ RSpec.describe 'Customer Show' do
     expect(page).to_not have_content("Pizza")
     expect(page).to_not have_content("Berries")
   end
+
+  it 'shows total price of all items' do
+    king = Supermarket.create!(name: "King Soops", location: "Denver")
+
+    toothpaste = Item.create!(name: "Toothpaste", price: 1)
+    bread = Item.create!(name: "Bread", price: 2)
+    bagels = Item.create!(name: "Bagels", price: 3)
+    pizza = Item.create!(name: "Pizza", price: 4)
+    berries = Item.create!(name: "Berries", price: 5)
+
+    ed = king.customers.create!(name: "Ed")
+    CustomerItem.create!(customer_id: ed.id, item_id: toothpaste.id)
+    CustomerItem.create!(customer_id: ed.id, item_id: bread.id)
+    CustomerItem.create!(customer_id: ed.id, item_id: bagels.id)
+
+    visit "/customers/#{ed.id}"
+
+    expect(page).to have_content("Total Price: $6.00")
+  end
 end
